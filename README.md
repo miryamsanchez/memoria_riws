@@ -1,8 +1,8 @@
 # Modelo de memoria de Traballo Fin de Grao
 
 Este proxecto LaTeX constitúe un modelo de referencia para as memorias de Traballo Fin de Grao
-do **Grao en Enxeñaría Informática** e do **Grao en Ciencia e Enxeñaría de Datos**
-da Facultade de Informática da Universidade da Coruña.
+do **Grao en Enxeñaría Informática**, do **Grao en Ciencia e Enxeñaría de Datos** e do
+**Grao en Intelixencia Artificial** da Facultade de Informática da Universidade da Coruña.
 
 Antes de usar este modelo, por favor, revisa con atención as [`FAQ (Frequently Asked Questions)`](https://gitlab.com/lauramcastro/modelo-tfg-gei-fic/-/wikis/Frequently-asked-questions-(faq)).
 
