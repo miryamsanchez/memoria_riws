@@ -11,6 +11,7 @@
 \RequirePackage{appendix}
 \RequirePackage{polyglossia}
 \RequirePackage{ifthen}
+\RequirePackage{notoccite}
 
 \ifdefined\lingua
   \message{Estilo TFG: elixiuse como lingua do documento: \lingua}
@@ -199,7 +200,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DTMsavenow{lastcompilationdate}
-\def\datasimple{\DTMmonthname{\DTMfetchmonth{lastcompilationdate}} de \DTMfetchyear{lastcompilationdate}}
+\def\datasimple{\begin{galician}\DTMmonthname{\DTMfetchmonth{lastcompilationdate}} de \DTMfetchyear{lastcompilationdate}\end{galician}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % opcións listings                     %
