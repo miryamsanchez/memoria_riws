@@ -91,9 +91,15 @@
     \message{Estilo TFG warning: non se elixiu mención, a compilación fallará}
   \fi
 }{
-  \def\nometitulacion{GRAO EN CIENCIA E ENXEÑARÍA DE DATOS}
-  \def\nomemencion{\mbox{}}
-  \def\carimbo{\vspace*{125pt}\mbox{}}
+  \ifthenelse{\equal{\titulacion}{gced}}{
+    \def\nometitulacion{GRAO EN CIENCIA E ENXEÑARÍA DE DATOS}
+    \def\nomemencion{\mbox{}}
+    \def\carimbo{\vspace*{125pt}\mbox{}}
+  }{
+    \def\nometitulacion{GRAO EN INTELIXENCIA ARTIFICIAL}
+    \def\nomemencion{\mbox{}}
+    \def\carimbo{\vspace*{125pt}\mbox{}}
+  }
 }
 
 \usepackage{latexsym}
