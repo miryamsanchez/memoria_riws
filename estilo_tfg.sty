@@ -207,6 +207,10 @@
 % opcións listings                     %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\lstdefinestyle{inline}{basicstyle=\ttfamily\small}
+\let\lsttext\lstinline
+\renewcommand{\lstinline}[1]{{\lstset{style=inline}\lsttext!#1!}}
+
 \lstset{
   basicstyle=\ttfamily\footnotesize, % estilo da fonte para entornos de código
   breakatwhitespace=true,            % pártense as liñas só polos espazos en branco
@@ -226,7 +230,7 @@
   showtabs=false,                    % non se mostran os tabuladores
   stepnumber=1,                      % a numeración de liñas vai de dúas en dúas
   stringstyle=\color{udcpink},       % as cadeas de texto literais aparecen en rosado
-  tabsize=2,	                     % os tabuladores equivalen a dous espazos
+  tabsize=2,	                       % os tabuladores equivalen a dous espazos
   xleftmargin=0.05\textwidth         % identación extra desde a marxe esquerda
 }
 
