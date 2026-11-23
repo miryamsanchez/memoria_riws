@@ -22,3 +22,6 @@
 # Archivos del sistema
 .DS_Store
 Thumbs.db
+*.acn
+*.glo
+*.ist

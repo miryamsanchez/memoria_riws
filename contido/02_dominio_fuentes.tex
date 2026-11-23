@@ -1,0 +1,75 @@
+\chapter{Dominio y fuentes de Información} 
+\label{chap:dominio_fuentes} 
+\section{Alcance del Dominio}
+El sistema se centra en la recuperación de contenido editorial en español relacionado con viajes por España. Se incluyen páginas dedicadas a destinos, ciudades, regiones, rutas y artículos temáticos sobre cultura, naturaleza, gastronomía, playas, deporte y otras propuestas turísticas. La unidad documental utilizada es una página web, de forma que cada documento del corpus representa una página de destino, una región, una ruta o un artículo turístico.
+
+El objeto del buscador no es gestionar todos los aspectos relacionados con la contratación de un viaje. Por ese motivo, quedan fuera del alcance:
+
+La consulta de precios de vuelos y alojamientos.
+La disponibilidad en tiempo real.
+La realización de reservas.
+Las reseñas y puntuaciones publicadas por usuarios.
+La comparación comercial entre hoteles, vuelos o paquetes turísticos.
+
+Esta delimitación permite trabajar con información relativamente estable y de carácter descriptivo. Los precios y la disponibilidad cambian según las fechas, mientras que las reservas requieren integración con sistemas externos y operaciones transaccionales que no forman parte de los objetivos del proyecto. Las reseñas de usuarios tampoco se incluyen porque constituyen contenido generado por terceros y pueden incorporar datos personales o información de calidad difícil de controlar.
+
+En consecuencia, el sistema no pretende sustituir a una plataforma comercial de reservas. Su objetivo es ayudar al usuario durante la fase previa de búsqueda y descubrimiento, proporcionando información que facilite la elección de destinos y actividades.
+
+\section{Selección de Fuentes de Información}
+Para construir la colección documental se seleccionaron dos fuentes:
+
+Spain.info, portal oficial de turismo de España.
+Wikivoyage en español, guía de viajes colaborativa.
+
+La selección de dos sitios diferentes responde a los requisitos académicos del proyecto, que contemplan la obtención de documentos desde, al menos, dos sitios web y su preparación para la indexación en Elasticsearch.
+
+Ambas fuentes ofrecen contenidos relacionados con el mismo dominio, pero presentan enfoques y estructuras diferentes. Esta complementariedad permite construir una colección más variada y obliga a desarrollar un proceso específico de rastreo y extracción para cada sitio.
+
+\subsection{Spain.info}
+Spain.info es el portal oficial de turismo de España y constituye la fuente institucional del proyecto. El sitio proporciona información sobre destinos, regiones, ciudades, rutas y artículos relacionados con patrimonio cultural, naturaleza, gastronomía, playas, deporte y otras experiencias turísticas.
+La URL semilla utilizada para comenzar el rastreo es:
+\url{https://www.spain.info/es/}
+A partir de esta dirección se siguen enlaces pertenecientes a secciones relevantes para el dominio:
+
+/es/destino/
+/es/region/
+/es/ciudades/
+/es/arte-cultura/
+/es/costas-playas/
+/es/naturaleza/
+/es/gastronomia-enoturismo/
+/es/deporte-aventura/
+/es/rutas/
+
+Se excluyen las páginas de información práctica, los enlaces externos, los fragmentos de URL y las páginas que no aportan contenido temático al buscador.
+
+La elección de Spain.info resulta adecuada porque ofrece información institucional, estructurada y centrada específicamente en el turismo nacional. Además, las comprobaciones iniciales realizadas con scrapy shell mostraron que la portada respondía con un código HTTP 200, proporcionaba alrededor de 196 KB de HTML y contenía 156 enlaces, entre los que se encontraban rutas a destinos, regiones y secciones temáticas. El contenido principal estaba disponible en el HTML descargado, por lo que no era necesario ejecutar JavaScript para extraerlo.
+
+\subsection{Wikivoyage}
+Wikivoyage es una guía de viajes colaborativa basada en MediaWiki. Sus páginas ofrecen información extensa sobre destinos y suelen organizarse en secciones como «Ver», «Hacer», «Comer» o «Dormir». Esta estructura proporciona una cantidad considerable de contenido textual y complementa el enfoque institucional de Spain.info.
+La URL semilla seleccionada es:
+\url{https://es.wikivoyage.org/wiki/Portal:España}
+El rastreo sigue enlaces internos que comienzan por /wiki/. Se excluyen las anclas y las páginas especiales o pertenecientes a otros espacios de nombres, identificadas generalmente por la presencia del carácter : en la URL.
+Wikivoyage se seleccionó porque sus contenidos se encuentran disponibles como HTML generado por MediaWiki y porque sus artículos ofrecen texto detallado sobre lugares, actividades y recomendaciones. Además, su carácter colaborativo introduce una estructura y un estilo diferentes a los de la fuente institucional, aumentando la diversidad de la colección.
+
+El contenido de Wikivoyage se publica bajo licencia CC BY-SA, por lo que el sistema conserva la procedencia y la URL original de cada documento para mantener la correspondiente atribución.
+
+\section{Complemento de las Fuentes}
+La elección conjunta de Spain.info y Wikivoyage permite integrar dos perspectivas complementarias:
+\begin{table}[htbp] 
+    \centering 
+    \caption{Comparación de las fuentes de información seleccionadas} 
+    \label{tab:comparacion-fuentes} 
+    \begin{tabular}{|p{3cm}|p{4cm}|p{5cm}|} 
+        \hline \textbf{Aspecto} & \textbf{Spain.info} & \textbf{Wikivoyage} \\ 
+        \hline Naturaleza de la fuente & Institucional & Colaborativa \\ 
+        \hline Enfoque & Promoción turística oficial & Guías prácticas y descriptivas \\ 
+        \hline Contenido principal & Destinos, regiones, rutas y artículos temáticos & Guías extensas de destinos \\ 
+        \hline Estructura & Páginas organizadas por categorías turísticas & Artículos divididos en secciones \\ 
+        \hline Información destacada & Descripción institucional y clasificación territorial & Información práctica y contenido textual amplio \\ 
+        \hline 
+    \end{tabular} 
+\end{table}
+La combinación de estas fuentes mejora la variedad del corpus. Spain.info aporta contenidos institucionales y una clasificación temática clara, mientras que Wikivoyage proporciona textos más extensos y secciones útiles para identificar actividades o aspectos concretos de un destino.
+
+Las diferencias estructurales también representan un reto técnico relevante. Cada sitio necesita un spider específico, ya que las rutas, la estructura HTML y los selectores utilizados para extraer la información son diferentes. No obstante, los documentos obtenidos se transforman posteriormente a un esquema común, lo que permite almacenarlos e indexarlos de manera uniforme.
